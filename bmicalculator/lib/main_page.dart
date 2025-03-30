@@ -1,6 +1,6 @@
 import 'package:bmicalculator/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,18 +12,14 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int height = 150;
   int weight = 70;
+
+  String gender = '';
+
   late double bmi = calBMI(height: height, weight: weight);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(title: Center(child: const Text("BMI Calculator",
-      style: TextStyle(color: kTextColor,
-      fontSize: 50,
-      fontWeight: FontWeight.bold),
-          ), 
-        ),
-      ),*/
       body: SafeArea(
         child: Container(
           color: const Color.fromARGB(255, 227, 249, 255),
@@ -34,48 +30,78 @@ class _MainPageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: GradientText(
+                    padding: const EdgeInsets.symmetric(vertical: 26),
+                    child: Text(
                       'BMI Calculator',
                       style: TextStyle(
+                        color: const Color.fromARGB(255, 7, 65, 111),
                         fontSize: 40.0,
                         fontWeight: FontWeight.bold,
                       ),
-                      colors: [Colors.blue, Colors.red, Colors.teal],
                     ),
                   ),
-                  /*Text(
-                  "",
-                  style: TextStyle(color: kTextColor,
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  ),
-                )*/
                 ],
               ),
 
               Row(
                 children: [
-                  Container(
-                    color: Colors.lightBlue.withAlpha(30),
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: const [
-                        Icon(Icons.male, size: 150),
-                        Text("Male"),
-                      ],
+                  GestureDetector(
+                    onTap: (){
+                      print("Male");
+                      setState(() {
+                        gender = 'M';
+                      });
+                      
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: gender == 'M'? Colors.lightBlue.withAlpha(150) : Colors.lightBlue.withAlpha(30), 
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      height: 175,
+                      width: 170,                    
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: const [
+                          Icon(Icons.male, size: 120),
+                          Text("Male",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        ],
+                      ),
                     ),
                   ),
 
                   Spacer(),
 
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: const [
-                        Icon(Icons.female, size: 150),
-                        Text("Female"),
-                      ],
+                  GestureDetector(
+                    onTap: (){
+                      print("Female");
+                      setState(() {
+                        gender = 'F';
+                      });
+                      
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: gender == 'F'? Colors.lightBlue.withAlpha(150) : Colors.lightBlue.withAlpha(30),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      height: 175,
+                      width: 170,                    
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: const [
+                          Icon(Icons.female, size: 120),
+                          Text("Female",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -85,7 +111,7 @@ class _MainPageState extends State<MainPage> {
 
               Container(decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent,
               width: 3,),
-              borderRadius: BorderRadius.circular(15)),
+              borderRadius: BorderRadius.circular(25)),
                 child: Row(
                   children: [
                     Padding(
@@ -266,3 +292,4 @@ class _MainPageState extends State<MainPage> {
     }
   }
 }
+                  
